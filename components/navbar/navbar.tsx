@@ -1,12 +1,14 @@
+import { useRouter } from "next/router"
 import { Wrapper } from "./navbar.styles"
 
 
 
 const Navbar = () => {
-    return(
+    return( 
         <Wrapper>
-
-            <nav>This is the navigation bar!!</nav>
+            <header>
+            Arcade
+            </header>
         </Wrapper>
     )
 }
