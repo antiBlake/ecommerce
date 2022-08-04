@@ -1,9 +1,11 @@
-import { Wrapper } from "./footer.styles"
+import { Wrapper } from "./footer.styles";
 
 const Footer = () => {
-    return(
-        <Wrapper>This is the footer</Wrapper>
-    )
-}
+  return (
+    <Wrapper>
+      <img style={{ width: "100px" }} src="arcade.svg" alt="arcade section" />
+    </Wrapper>
+  );
+};
 
-export default Footer
+export default Footer;

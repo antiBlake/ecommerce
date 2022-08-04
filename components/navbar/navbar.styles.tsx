@@ -1,19 +1,17 @@
 import styled from "styled-components";
 
-
 export const Wrapper = styled.nav`
-background: orange;
-flex: 10%;
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
-
-header{
+  background: white;
+  position: fixed;
+  top: 0;
+  height: 15vmin;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 10px 8px rgb(0, 0, 0, 25%);
+  header {
     font-weight: 600;
     font-size: 1.8rem;
-}
-
-`
-
-
+  }
+`;

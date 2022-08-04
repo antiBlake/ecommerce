@@ -12,16 +12,12 @@ export const GlobalStyle = createGlobalStyle`
 body{
 padding: 0;
 margin: 0;
-height: 100vh;
+height: 100%;
 }
 
 #__next{
-    background: yellow;
-    height: inherit;
-    display: flex;
-    flex-direction: column;
+    height: 100%;
     
 }
 
-`
-    
+`;
