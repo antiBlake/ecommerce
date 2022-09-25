@@ -12,7 +12,9 @@ export const GlobalStyle = createGlobalStyle`
 body{
 padding: 0;
 margin: 0;
-height: 100%;
+height: 100vh;
+overflow: hidden;
+background-color: #f5f5f5;
 }
 
 #__next{

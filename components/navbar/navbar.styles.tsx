@@ -9,7 +9,6 @@ export const Wrapper = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 10px 8px rgb(0, 0, 0, 25%);
   header {
     font-weight: 600;
     font-size: 1.8rem;

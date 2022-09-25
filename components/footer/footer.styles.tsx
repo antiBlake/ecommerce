@@ -7,7 +7,12 @@ export const Wrapper = styled.footer`
   border-top: 1px solid rgb(0, 0, 0, 25%);
   position: fixed;
   bottom: 0;
-  z-index: 99;
   display: flex;
   justify-content: center;
+
+  a {
+    background-color: white;
+    padding: 0;
+    border: none;
+  }
 `;
