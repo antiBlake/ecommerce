@@ -1,9 +1,14 @@
 import { useRouter } from "next/router";
 import { Wrapper } from "./navbar.styles";
 import React from "react";
+import { ShoppingCart } from "@material-ui/icons";
+import { Badge } from "@material-ui/core";
+import { useShoppingCart } from "../../context/shoppingCart";
+import Button from "@mui/material/Button";
 const Navbar = () => {
   const { pathname } = useRouter();
-  console.log(pathname);
+  const { getCartQuantity, cartOpen, setCartOpen } = useShoppingCart();
+
   if (pathname === "/arcade") {
     return (
       <Wrapper>
@@ -15,6 +20,25 @@ const Navbar = () => {
     return (
       <Wrapper>
         <header>Home</header>
+        <Button
+          onClick={() => {
+            setCartOpen(true);
+          }}
+          style={{
+            width: "60px",
+            height: "60px",
+            borderRadius: "50%",
+            color: "grey",
+          }}
+        >
+          <Badge
+            badgeContent={getCartQuantity()}
+            color="error"
+            overlap="rectangular"
+          >
+            <ShoppingCart fontSize="medium" style={{ color: "black" }} />
+          </Badge>
+        </Button>
       </Wrapper>
     );
   }

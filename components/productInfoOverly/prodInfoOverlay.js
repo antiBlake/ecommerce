@@ -9,32 +9,38 @@ import {
 import { sanityClient, urlFor } from "../../lib/sanity";
 import { formatCurrency } from "../../utils/currencyFormatter";
 import { CloseMenu } from "./prodInfoOverlay.styles";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Button,
-  ButtonGroup,
-} from "@mui/material";
+import { motion } from "framer-motion";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import {
   AddRounded,
   ExpandMoreRounded,
   RemoveRounded,
 } from "@material-ui/icons";
+import { useShoppingCart } from "../../context/shoppingCart";
 
 const ProductInfoOverlay = ({ currentProduct, setCurrentProduct }) => {
-  console.log(currentProduct, "this is me");
+  const { modifyItemQuantity, getItemQuantity } = useShoppingCart();
+  console.log(getItemQuantity(currentProduct._id)?.quantity);
+  const cartButtonState = () => {
+    if (getItemQuantity(currentProduct._id) == null) return "Add to cart";
+    if (getItemQuantity(currentProduct._id) !== itemQuantity) {
+      return "Update quantity";
+    } else {
+      return "In cart";
+    }
+  };
 
   const [moreVendorProudcts, setMoreVendorProducts] = useState([]);
-  const [itemQuantity, setItemQuantity] = useState(0);
+  const [itemQuantity, setItemQuantity] = useState(
+    getItemQuantity(currentProduct._id) || 1
+  );
 
   const increment = () => {
     setItemQuantity((prev) => prev + 1);
   };
 
   const decrement = () => {
-    if (itemQuantity === 0) return;
+    if (itemQuantity === 1) return;
     setItemQuantity((prev) => prev - 1);
   };
   useEffect(() => {
@@ -43,15 +49,15 @@ const ProductInfoOverlay = ({ currentProduct, setCurrentProduct }) => {
       const response = await sanityClient.fetch(
         `*[_type == 'product' && vendor->{title}.title == $vendor]{
           
-  
-   defaultProductVariant,
-  _id,
-  title,
-  vendor->{
-  title,
-  logo
-}
-}
+          
+          defaultProductVariant,
+          _id,
+          title,
+          vendor->{
+            title,
+            logo
+          }
+        }
         `,
         { vendor }
       );
@@ -64,18 +70,12 @@ const ProductInfoOverlay = ({ currentProduct, setCurrentProduct }) => {
 
     getMoreFromVendor();
   }, [currentProduct]);
-  console.log(
-    moreVendorProudcts.filter((product) => product._id != currentProduct._id),
-    "this c must be love on the brain"
-  );
+
   return (
     <>
       <Wrapper
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          type: "tween",
-        }}
+        initial={{ y: "100vh" }}
+        animate={{ y: "0vh" }}
         exit={{ y: "100vh" }}
       >
         <motion.img
@@ -94,17 +94,8 @@ const ProductInfoOverlay = ({ currentProduct, setCurrentProduct }) => {
           </CloseMenu>
           <h4>{currentProduct.title}</h4>
           <h1>{formatCurrency(currentProduct.defaultProductVariant.price)}</h1>
-          <CartButtons>
+          <CartButtons primary>
             <div id="quantity-control-container">
-              <button
-                className="quantity-change-buttons"
-                onClick={() => {
-                  increment();
-                }}
-              >
-                {<AddRounded />}
-              </button>
-              <div id="quantity">{itemQuantity}</div>
               <button
                 className="quantity-change-buttons"
                 onClick={() => {
@@ -113,9 +104,25 @@ const ProductInfoOverlay = ({ currentProduct, setCurrentProduct }) => {
               >
                 {<RemoveRounded />}
               </button>
+              <div id="quantity">{itemQuantity}</div>
+              <button
+                className="quantity-change-buttons"
+                onClick={() => {
+                  increment();
+                }}
+              >
+                {<AddRounded />}
+              </button>
             </div>
-            <button id="add-to-cart">
-              <h1></h1>Add to cart
+            <button
+              id="add-to-cart"
+              onClick={() => {
+                if (cartButtonState() == "In cart") return;
+                console.log("tis ran");
+                modifyItemQuantity(currentProduct, itemQuantity);
+              }}
+            >
+              {cartButtonState()}
             </button>
           </CartButtons>
           <Accordion>
@@ -157,9 +164,8 @@ const ProductInfoOverlay = ({ currentProduct, setCurrentProduct }) => {
           <h2 style={{ marginTop: "50px" }}>More from this vendor</h2>
           <VendorProductsWrapper>
             {moreVendorProudcts?.map((product) => (
-              <VendorProduct>
+              <VendorProduct key={product._id}>
                 <img
-                  key={product._id}
                   src={urlFor(product.defaultProductVariant.images[0])}
                   alt="Product Image"
                   onClick={() => {

@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 
 export const Wrapper = styled(motion.div)`
   width: 100vw;
-  height: 100vh;
+  height: 110vh;
   background-color: white;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 99;
   overflow-y: scroll;
-  padding-bottom: 3rem;
+  padding-bottom: 10rem;
 `;
 
 export const ProductInfoSection = styled.div`
@@ -107,7 +107,7 @@ export const CartButtons = styled.div`
     color: white;
     width: 40vw;
     height: 60px;
-    font-size: 1.3rem;
+    font-size: 5vmin;
     display: flex;
     justify-content: center;
     align-items: center;

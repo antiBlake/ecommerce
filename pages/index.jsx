@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import ProductInfoOverlay from "../components/productInfoOverly/prodInfoOverlay";
 import { AnimatePresence, motion } from "framer-motion";
 
-
 const productQuery = `*[_type == 'product'] | order(_id)[0...3]{
   defaultProductVariant,
   _id,
@@ -108,7 +107,7 @@ const Home = ({ results }) => {
       setHasMore(false)
     }
   }
-  console.log(user)
+
 
   return (
 
