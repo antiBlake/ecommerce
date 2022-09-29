@@ -31,21 +31,25 @@ export default async function handler(req, res) {
   }
 
   if (userInfo.length === 0) {
-    const data = await fetch(
-      `https://${projectId}.api.sanity.io/${config.apiVersison}/data/mutate/${datasetName}?returnIds=true`,
-      {
-        method: "post",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${process.env.SANITY_AUTH_TOKEN}`,
-        },
-        body: JSON.stringify({ mutations }),
-      }
-    );
-
-    const datas = await data.json();
-    console.log(datas);
+    try {
+      const data = await fetch(
+        `https://${projectId}.api.sanity.io/${config.apiVersison}/data/mutate/${datasetName}?returnIds=true`,
+        {
+          method: "post",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${process.env.SANITY_AUTH_TOKEN}`,
+          },
+          body: JSON.stringify({ mutations }),
+        }
+      );
+    } catch (err) {
+      console.log(err);
+      res.status(500).send({ ans: `tHAT DIDN'T WORK FOR SOME REASON` });
+      return;
+    }
   }
 
   res.status(201).json({ ans: "yep it worked" });
+  return;
 }

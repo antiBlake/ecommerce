@@ -45,7 +45,7 @@ const Navbar = () => {
 
   return (
     <Wrapper>
-      <header>Nothin' Here</header>
+      <header>Nothin Here</header>
     </Wrapper>
   );
 };
