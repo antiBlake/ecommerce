@@ -10,9 +10,6 @@ export default async function handler(req, res) {
     process.env.ALGOLIA_ADMIN_API_KEY
   );
 
-  const products = await sanityClient.fetch(
-    `*[_type == 'product'&&!(_id in path("drafts.**"))][]._id`
-  );
   const algoliaIndex = algolia.initIndex("dev_ecommerce");
 
   const sanityAlgolia = indexer(
@@ -30,13 +27,7 @@ export default async function handler(req, res) {
     (document) => document
   );
 
-  try {
-    sanityAlgolia.webhookSync(sanityClient, req.body);
-
-    res.status(200).send("success!");
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("something went wrong");
-  }
-  return;
+  return sanityAlgolia
+    .webhookSync(sanityClient, req.body)
+    .then(() => res.status(200).send("ok"));
 }
