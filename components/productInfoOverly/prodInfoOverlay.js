@@ -11,12 +11,10 @@ import { formatCurrency } from "../../utils/currencyFormatter";
 import { CloseMenu } from "./prodInfoOverlay.styles";
 import { motion } from "framer-motion";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import {
-  AddRounded,
-  CloseRounded,
-  ExpandMoreRounded,
-  RemoveRounded,
-} from "@material-ui/icons";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
+import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useShoppingCart } from "../../context/shoppingCart";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -66,7 +64,7 @@ const ProductInfoOverlay = ({ currentProduct }) => {
             router.back();
           }}
         >
-          <CloseRounded />
+          <CloseRoundedIcon />
         </CloseMenu>
         <h4>{currentProduct.title}</h4>
         <h1>{formatCurrency(currentProduct?.defaultProductVariant?.price)}</h1>
@@ -78,7 +76,7 @@ const ProductInfoOverlay = ({ currentProduct }) => {
                 decrement();
               }}
             >
-              {<RemoveRounded />}
+              {<RemoveRoundedIcon />}
             </button>
             <div id="quantity">{itemQuantity}</div>
             <button
@@ -87,7 +85,7 @@ const ProductInfoOverlay = ({ currentProduct }) => {
                 increment();
               }}
             >
-              {<AddRounded />}
+              {<AddRoundedIcon />}
             </button>
           </div>
           <button
@@ -101,7 +99,7 @@ const ProductInfoOverlay = ({ currentProduct }) => {
           </button>
         </CartButtons>
         <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreRounded />}>
+          <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />}>
             <h3>Product Description</h3>
           </AccordionSummary>
           <AccordionDetails>
@@ -113,7 +111,7 @@ const ProductInfoOverlay = ({ currentProduct }) => {
           </AccordionDetails>
         </Accordion>
         <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreRounded />}>
+          <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />}>
             <h3>Size Guide</h3>
           </AccordionSummary>
           <AccordionDetails>
@@ -125,7 +123,7 @@ const ProductInfoOverlay = ({ currentProduct }) => {
           </AccordionDetails>
         </Accordion>
         <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreRounded />}>
+          <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />}>
             <h3>Shipping Info</h3>
           </AccordionSummary>
           <AccordionDetails>

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import algoliasearch from "algoliasearch";
 import { NavBar } from '../components/Explore/explorePage.styles';
 import { Button } from '@mui/material';
-import { FilterListRounded } from '@material-ui/icons';
+import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 
 
 const Explore = () => {
@@ -37,7 +37,7 @@ const Explore = () => {
           <input placeholder='Search for something...' type='search' onChange={(e) => { setSearchQuery(e.target.value) }} value={searchQuery} />  
                     <Button style={{borderRadius: '50%'}}>
 
-            <FilterListRounded style={{color: 'black'}} />
+            <FilterListRoundedIcon style={{color: 'black'}} />
                     </Button>
                 </div>
                 <div id = 'search-tags'>

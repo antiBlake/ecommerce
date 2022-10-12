@@ -7,10 +7,11 @@ import { CircularProgress } from "@mui/material";
 import { useUser } from "@auth0/nextjs-auth0/dist/frontend/use-user";
 import { useEffect } from "react";
 import Button from "@mui/material/Button";
-import { Badge } from "@material-ui/core";import { useShoppingCart } from "../context/shoppingCart";
-import { LocalMall } from "@material-ui/icons";
-import { AnimatePresence, motion } from "framer-motion";
+import Badge from '@mui/material/Badge';
+import { useShoppingCart } from "../context/shoppingCart";
+import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 const productQuery = `*[_type == 'product'] | order(_id)[0...3]{
   defaultProductVariant,
@@ -102,7 +103,7 @@ console.log(productData)
             color="error"
             overlap="rectangular"
           >
-            <LocalMall fontSize="medium" style={{ color: "black" }} />
+            <LocalMallIcon fontSize="medium" style={{ color: "black" }} />
           </Badge>
         </Button>
       

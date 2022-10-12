@@ -1,15 +1,13 @@
 import { Wrapper } from "./footer.styles";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import {
-  CalendarViewDayOutlined,
-  Home,
-  HomeOutlined,
-  SearchOutlined,
-  SearchRounded,
-  VideogameAssetOutlined,
-  VideogameAssetRounded,
-} from "@material-ui/icons";
+
+import HomeIcon from "@mui/icons-material/Home";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
+import VideogameAssetOutlinedIcon from "@mui/icons-material/VideogameAssetOutlined";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Footer = () => {
   const { pathname, push, replace } = useRouter();
@@ -19,21 +17,18 @@ const Footer = () => {
       <Link passHref href={"/"}>
         <a>
           {pathname == "/" ? (
-            <Home fontSize="large" style={{ color: "black" }} />
+            <HomeIcon fontSize="large" style={{ color: "black" }} />
           ) : (
-            <HomeOutlined fontSize="large" style={{ color: "black" }} />
+            <HomeOutlinedIcon fontSize="large" style={{ color: "black" }} />
           )}
         </a>
       </Link>
       <Link passHref href={"/arcade"}>
         <a>
           {pathname == "/arcade" ? (
-            <VideogameAssetRounded
-              fontSize="large"
-              style={{ color: "black" }}
-            />
+            <VideogameAssetIcon fontSize="large" style={{ color: "black" }} />
           ) : (
-            <VideogameAssetOutlined
+            <VideogameAssetOutlinedIcon
               fontSize="large"
               style={{ color: "black" }}
             />
@@ -43,9 +38,9 @@ const Footer = () => {
       <Link passHref href={"/explore"}>
         <a>
           {pathname == "/explore" ? (
-            <SearchRounded fontSize="large" style={{ color: "black" }} />
+            <SearchIcon fontSize="large" style={{ color: "black" }} />
           ) : (
-            <SearchOutlined fontSize="large" style={{ color: "black" }} />
+            <SearchOutlinedIcon fontSize="large" style={{ color: "black" }} />
           )}
         </a>
       </Link>

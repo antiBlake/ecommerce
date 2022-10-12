@@ -1,4 +1,3 @@
-import { FilterListRounded, Search, SearchRounded } from '@material-ui/icons'
 import React from 'react'
 import { NavBar, SearchResultItems, Wrapper } from './explorePage.styles'
 import { urlFor } from '../../lib/sanity'

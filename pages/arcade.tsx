@@ -4,7 +4,7 @@ import gameData from "../gameData.js";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
 import { CloseMenu } from "../components/productInfoOverly/prodInfoOverlay.styles";
-import { CloseRounded } from "@material-ui/icons";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { NavBar } from "../components/Home/home.styles";
 // styling
 const Wrapper = styled(motion.div)`
@@ -165,7 +165,7 @@ const Arcade = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <CloseRounded />
+              <CloseRoundedIcon />
             </CloseMenu>
             <GameInfoSection
               initial={{ opacity: 0 }}
