@@ -4,12 +4,12 @@ export const Wrapper = styled.footer`
   height: 15vmin;
   width: 100%;
   background: white;
-  border-top: 1px solid rgb(0, 0, 0, 25%);
+  padding: 0 2rem;
   position: fixed;
   bottom: 0;
   display: flex;
-  justify-content: center;
-
+  justify-content: space-between;
+  align-items: center;
   a {
     background-color: white;
     padding: 0;

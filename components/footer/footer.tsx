@@ -1,40 +1,52 @@
 import { Wrapper } from "./footer.styles";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import {
+  CalendarViewDayOutlined,
+  Home,
+  HomeOutlined,
+  SearchOutlined,
+  SearchRounded,
+  VideogameAssetOutlined,
+  VideogameAssetRounded,
+} from "@material-ui/icons";
 
 const Footer = () => {
   const { pathname, push, replace } = useRouter();
-
+  console.log(pathname);
   return (
     <Wrapper>
       <Link passHref href={"/"}>
         <a>
-          <img
-            style={{
-              width: "35px",
-              filter:
-                pathname === "/"
-                  ? "invert(0%) sepia(98%) saturate(9%) hue-rotate(246deg) brightness(105%) contrast(99%)"
-                  : "invert(55%) sepia(6%) saturate(4%) hue-rotate(9deg) brightness(108%) contrast(100%)",
-            }}
-            src="home.svg"
-            alt="arcade section"
-          />
+          {pathname == "/" ? (
+            <Home fontSize="large" style={{ color: "black" }} />
+          ) : (
+            <HomeOutlined fontSize="large" style={{ color: "black" }} />
+          )}
         </a>
       </Link>
       <Link passHref href={"/arcade"}>
         <a>
-          <img
-            style={{
-              width: "43px",
-              filter:
-                pathname === "/arcade"
-                  ? "invert(0%) sepia(98%) saturate(9%) hue-rotate(246deg) brightness(105%) contrast(99%)"
-                  : "invert(55%) sepia(6%) saturate(4%) hue-rotate(9deg) brightness(108%) contrast(100%)",
-            }}
-            src="arcade.svg"
-            alt="arcade section"
-          />
+          {pathname == "/arcade" ? (
+            <VideogameAssetRounded
+              fontSize="large"
+              style={{ color: "black" }}
+            />
+          ) : (
+            <VideogameAssetOutlined
+              fontSize="large"
+              style={{ color: "black" }}
+            />
+          )}
+        </a>
+      </Link>
+      <Link passHref href={"/explore"}>
+        <a>
+          {pathname == "/explore" ? (
+            <SearchRounded fontSize="large" style={{ color: "black" }} />
+          ) : (
+            <SearchOutlined fontSize="large" style={{ color: "black" }} />
+          )}
         </a>
       </Link>
     </Wrapper>

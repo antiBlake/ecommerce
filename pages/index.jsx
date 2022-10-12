@@ -1,68 +1,38 @@
 import React, { useRef } from "react";
 import { useState } from "react";
 import { sanityClient, urlFor } from "../lib/sanity";
-import styled from "styled-components";
+import { Wrapper,NavBar,ProductInfo} from "../components/Home/home.styles";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { CircularProgress } from "@mui/material";
 import { useUser } from "@auth0/nextjs-auth0/dist/frontend/use-user";
 import { useEffect } from "react";
-import ProductInfoOverlay from "../components/productInfoOverly/prodInfoOverlay";
+import Button from "@mui/material/Button";
+import { Badge } from "@material-ui/core";import { useShoppingCart } from "../context/shoppingCart";
+import { LocalMall } from "@material-ui/icons";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 const productQuery = `*[_type == 'product'] | order(_id)[0...3]{
   defaultProductVariant,
   _id,
   title,
+  slug,
   vendor->{
   title,
-  logo
+  logo,_id
 }
 }`;
 
-const Wrapper = styled.div`
- overflow-Y: scroll; 
- height: 100%; 
- ::-webkit-scrollbar{
-  display: none
- }
- -ms-overflow-style: none;
- scrollbar-width: none;
 
-
-`
-const ProductInfo = styled.div`
-margin-bottom: 40px;
-width: 100%;
-
-
-
-
-#productImage{
- width: 100%;
-}
-
-#vendorImage{
-  width: 50px;
-  margin-right: 20px;
-}
-
-#action-section{
-  display:flex;
-}
-
-.action-button{
-  margin-right: 10px;
-}
-`;
 const Home = ({ results }) => {
 
-
+  const router = useRouter()
+  const { getCartQuantity, cartOpen, setCartOpen } = useShoppingCart();
   const { user, loading, error } = useUser()
   const [productData, setProductData] = useState(results)
   const [hasMore, setHasMore] = useState(true)
   const lastId = useRef(results[results.length - 1]._id)
-  const [currentProudct, setCurrentProduct] = useState(null)
-
+console.log(productData)
   useEffect(() => {
 
     async function fetchData() {
@@ -93,6 +63,7 @@ const Home = ({ results }) => {
      defaultProductVariant,
   _id,
   title,
+  slug,
   vendor->{
   title,
   logo
@@ -112,9 +83,32 @@ const Home = ({ results }) => {
   return (
 
     <>
-
+      
+      <NavBar>
+        <header>Home</header>
+        <Button
+          onClick={() => {
+            setCartOpen(true);
+          }}
+          style={{
+            width: "60px",
+            height: "60px",
+            borderRadius: "50%",
+            color: "grey",
+          }}
+        >
+          <Badge
+            badgeContent={getCartQuantity()}
+            color="error"
+            overlap="rectangular"
+          >
+            <LocalMall fontSize="medium" style={{ color: "black" }} />
+          </Badge>
+        </Button>
+      
+</NavBar>
       <Wrapper id="parent" >
-
+        
         <InfiniteScroll
           dataLength={productData.length}
           next={fetchNextPage}
@@ -129,11 +123,11 @@ const Home = ({ results }) => {
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {productData.map((product) => (
             <ProductInfo key={product._id}>
-              <div>
-                <img id="vendorImage" src={urlFor(product.vendor.logo).url()} alt="" />
-
+              <div id = 'vendor-info-container'>
+                <img id="vendorImage" src={urlFor(product.vendor.logo).url()} alt={product.title} onClick={() =>{router.push(`/vendor/${product.vendor._id}`)}} />
+                <span>{product.vendor.title}</span>
               </div>
-              <motion.img  id='productImage' src={urlFor(product.defaultProductVariant.images[0])} alt="Product Image" onClick={() => { setCurrentProduct(product); }} whileTap={{ scale: 0.9 }} />
+              <motion.img  id='productImage' src={urlFor(product.defaultProductVariant.images[0])} alt="Product Image" onClick={() => {router.push(`/product/${product.slug.current}`) }} whileTap={{ scale: 0.9 }} />
 
               <div>
                 <div id='action-section'>
@@ -148,21 +142,15 @@ const Home = ({ results }) => {
           ))}
         </InfiniteScroll>
       </Wrapper>
-      <AnimatePresence>
 
-      {currentProudct &&
-
-
-          <ProductInfoOverlay currentProduct={currentProudct} setCurrentProduct={setCurrentProduct} key={currentProudct._id} />}
-      </AnimatePresence>
     </>
 
-  );
+  )
 };
 
 export default Home;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const results = await sanityClient.fetch(productQuery);
 
   return { props: { results } };

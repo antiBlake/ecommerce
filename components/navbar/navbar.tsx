@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { Wrapper } from "./navbar.styles";
 import React from "react";
-import { ShoppingCart } from "@material-ui/icons";
+import { LocalMall } from "@material-ui/icons";
 import { Badge } from "@material-ui/core";
 import { useShoppingCart } from "../../context/shoppingCart";
 import Button from "@mui/material/Button";
@@ -36,7 +36,7 @@ const Navbar = () => {
             color="error"
             overlap="rectangular"
           >
-            <ShoppingCart fontSize="medium" style={{ color: "black" }} />
+            <LocalMall fontSize="medium" style={{ color: "black" }} />
           </Badge>
         </Button>
       </Wrapper>
