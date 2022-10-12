@@ -137,8 +137,13 @@ const ProductInfoOverlay = ({ currentProduct }) => {
         <h2 style={{ marginTop: "50px" }}>More from this vendor</h2>
         <VendorProductsWrapper>
           {currentProduct?.moreFromVendor?.map((product) => (
-            <Link href={`/product/${product.slug.current}`} passHref scroll>
-              <VendorProduct key={product._id}>
+            <Link
+              href={`/product/${product.slug.current}`}
+              passHref
+              scroll
+              key={product._id}
+            >
+              <VendorProduct>
                 <img
                   src={urlFor(product.defaultProductVariant.images[0])}
                   alt="Product Image"

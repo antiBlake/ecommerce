@@ -10,7 +10,7 @@ const ExplorePage = ({searchResults}) => {
     return (
         <Wrapper>
               {searchResults?.hits?.map((searchResult) => 
-              (<Link href={`/product/${searchResult.path}`} passHref>
+              (<Link href={`/product/${searchResult.path}`} passHref key={searchResult._id}>
               
               
                   <SearchResultItems  whileTap={{ scale: 0.9 }} >
