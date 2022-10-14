@@ -1,11 +1,16 @@
 import { Button } from "@mui/material";
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 import React from "react";
 import { urlFor } from "../../lib/sanity";
 
-import { VendorInfo, VendorNav, Wrapper } from "./vendorPage.styles";
+
+import { ProductImageWrapper, VendorInfo, VendorNav, Wrapper } from "./vendorPage.styles";
 
 
-const VendorPage = ({vendorData}) => {
+const VendorPage = ({ vendorData }) => {
+  
+  const router = useRouter()
   return (
     <>
       <VendorNav>
@@ -37,6 +42,18 @@ const VendorPage = ({vendorData}) => {
           <button>m</button>
           <button>h</button>
         </div>
+        <ProductImageWrapper>
+          {vendorData.vendorProducts?
+            vendorData.vendorProducts.map(item => (
+              <motion.div id="image-wrapper" key={item._id} whileTap = {{scale: 0.9}} onClick ={() =>{router.push(`/product/${item.slug.current}`)}}>
+
+                <img src={urlFor(item.defaultProductVariant.images[0])}   id='product-image'/>
+              </motion.div>
+            ))
+
+            : <p>No more products from this vendor</p>
+          }
+        </ProductImageWrapper>
       </Wrapper>
       
       

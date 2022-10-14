@@ -5,10 +5,11 @@ const vendorInfoQuery = `*[_type == 'vendor' && _id == $vendorId]{
 
     logo,
   title,
-  'vendorProducts':*[_type == 'product' && references(^._id) ]{
+  'vendorProducts':*[_type == 'product' && references(^._id) && !(_id in path('drafts.**'))]{
     slug,
     defaultProductVariant,
     title,
+    _id
 
   }
 }

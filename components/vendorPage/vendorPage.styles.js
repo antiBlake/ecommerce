@@ -48,3 +48,20 @@ export const VendorInfo = styled.div`
     align-items: center;
   }
 `;
+
+export const ProductImageWrapper = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 7px;
+  #product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #image-wrapper {
+    height: 17vh;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+`;
