@@ -12,7 +12,9 @@ import { useShoppingCart } from "../../context/shoppingCart";
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
+import Link from "next/link";
 
 
 
@@ -114,19 +116,29 @@ console.log(productData)
           scrollableTarget='parent'
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {productData.map((product) => (
-            <ProductInfo key={product._id}>
+            <ProductInfo key={product._id} >
               <div id = 'vendor-info-container'>
-                <img id="vendorImage" src={urlFor(product.vendor.logo).url()} alt={product.title} onClick={() =>{router.push(`/vendor/${product.vendor._id}`)}} />
+                <img id="vendorImage" src={urlFor(product.vendor.logo).url()} alt={product.title} onClick={() => { router.push(`/vendor/${product.vendor._id}`) }} />
                 <span>{product.vendor.title}</span>
               </div>
-              <motion.img  id='productImage' src={urlFor(product.defaultProductVariant.images[0])} alt="Product Image" onClick={() => {router.push(`/product/${product.slug.current}`) }} whileTap={{ scale: 0.9 }} />
+              <Link href={`/product/${product.slug.current}`} >
+              <a>
+              <img  id='productImage' src={urlFor(product.defaultProductVariant.images[0])} alt="Product Image"  whileTap={{ scale: 0.9 }} />
 
+                </a>
+                </Link>
+                
+
+              
               <div>
                 <div id='action-section'>
-                  <img className="action-button" src='likeButton.svg' alt="" />
-                  <img className="action-button" src='commentButton.svg' alt="" />
+                  <motion.div whileTap={{scale: 0.85}}>
+                    
+                  <FavoriteBorderIcon fontSize='large' sx={{marginRight: '10px'}}/>
+                  </motion.div>
+                  <CommentRoundedIcon fontSize='large'/>
                 </div>
-                <h3>3000 likes</h3>
+                <h4 style={{ marginTop: '10px'}}>3000 likes</h4>
               </div>
 
             </ProductInfo>

@@ -34,7 +34,7 @@ export const VendorProductsWrapper = styled.div`
   overflow-y: hidden;
 `;
 
-export const VendorProduct = styled.div`
+export const VendorProduct = styled(motion.div)`
   display: inline-block;
   background-color: white;
   width: 200px;

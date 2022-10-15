@@ -36,7 +36,7 @@ export const VendorInfo = styled.div`
     display: flex;
     justify-content: space-between;
     flex-grow: 3;
-    max-width: 200px;
+    max-width: 50vmin;
     h3 {
       margin: 0;
     }
@@ -46,6 +46,7 @@ export const VendorInfo = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 4vmin;
   }
 `;
 
@@ -60,7 +61,6 @@ export const ProductImageWrapper = styled.div`
     object-fit: cover;
   }
   #image-wrapper {
-    height: 17vh;
     border-radius: 5px;
     overflow: hidden;
   }

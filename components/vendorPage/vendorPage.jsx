@@ -45,9 +45,9 @@ const VendorPage = ({ vendorData }) => {
         <ProductImageWrapper>
           {vendorData.vendorProducts?
             vendorData.vendorProducts.map(item => (
-              <motion.div id="image-wrapper" key={item._id} whileTap = {{scale: 0.9}} onClick ={() =>{router.push(`/product/${item.slug.current}`)}}>
+              <motion.div className="image-wrapper" key={item._id} whileTap = {{scale: 0.9}} onClick ={() =>{router.push(`/product/${item.slug.current}`)}}>
 
-                <img src={urlFor(item.defaultProductVariant.images[0])}   id='product-image'/>
+                <img src={urlFor(item.defaultProductVariant.images[0]).width(300).height(300)}   id='product-image'/>
               </motion.div>
             ))
 

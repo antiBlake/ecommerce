@@ -143,7 +143,7 @@ const ProductInfoOverlay = ({ currentProduct }) => {
               scroll
               key={product._id}
             >
-              <VendorProduct>
+              <VendorProduct whileTap={{ scale: 0.9 }}>
                 <img
                   src={urlFor(product.defaultProductVariant.images[0])}
                   alt="Product Image"

@@ -26,11 +26,13 @@ export const NavBar = styled.nav`
 `;
 
 export const ProductInfo = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   width: 100%;
 
   #productImage {
     width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   #vendor-info-container {
@@ -51,6 +53,7 @@ export const ProductInfo = styled.div`
 
   #action-section {
     display: flex;
+    margin-top: 10px;
   }
 
   .action-button {
