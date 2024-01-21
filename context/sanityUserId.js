@@ -1,5 +1,4 @@
 import React from "react";
-import { createContext } from "react";
 import { useUser } from "@auth0/nextjs-auth0/dist/frontend/use-user";
 import { useState, useEffect, useContext } from "react";
 import { sanityClient } from "../lib/sanity";
