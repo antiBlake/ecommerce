@@ -36,4 +36,3 @@ export const SanityUIDProvider = ({ children }) => {
     </SanityUIDContext.Provider>
   );
 };
-
